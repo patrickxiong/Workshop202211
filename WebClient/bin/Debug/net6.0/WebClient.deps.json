@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "WebClient/1.0.0": {
+        "dependencies": {
+          "ModelLib": "1.0.0"
+        },
         "runtime": {
           "WebClient.dll": {}
+        }
+      },
+      "ModelLib/1.0.0": {
+        "runtime": {
+          "ModelLib.dll": {}
         }
       }
     }
   },
   "libraries": {
     "WebClient/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ModelLib/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
