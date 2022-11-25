@@ -8,7 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Logic\" />
+	  <Compile Remove="Logic\**" />
+	  <Content Remove="Logic\**" />
+	  <EmbeddedResource Remove="Logic\**" />
+	  <None Remove="Logic\**" />
 	</ItemGroup>
 
 	<ItemGroup>
