@@ -51,8 +51,8 @@ namespace Workshop2022.API.Controllers
 
             var result = new FeaturesResponse()
             {
-              // populate as needed
-              Features = features.Select(f => new FeatureItem(f.FeatureCode, f.Version, f.Enabled)).ToArray()
+                // populate as needed
+                Features = features.Select(f => new FeatureItem(f.FeatureCode, f.Version, f.Enabled)).ToArray()
             };
             
             return Ok(result);
