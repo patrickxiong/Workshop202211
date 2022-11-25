@@ -22,7 +22,7 @@ namespace FeatureSwitch
 #if DEBUG
                 decoder = new NoEncoder();
 #else
-            decoder = new SimpleDecoder();
+            decoder = new SimpleEncoder();
 #endif
 
                 FeatureClient _featureClient = new FeatureClient(decoder);
