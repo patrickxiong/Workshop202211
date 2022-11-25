@@ -10,30 +10,50 @@ namespace FeatureSwitch
 {
     public class FeatureSwitch
     {
-        static Dictionary<string,bool> features=new Dictionary<string,bool>();
+        static Dictionary<string, bool> features = new Dictionary<string, bool>();
+
+        private static bool Initialized = false;
+
 
         public static void LoadConfig()
         {
-            FeatureClient _featureClient=new FeatureClient(null);
+                IEncodeDecode decoder;
 
-            FeatureItem[] featureItems = _featureClient.LoadConfigureFile();
+#if DEBUG
+                decoder = new NoEncoder();
+#else
+            decoder = new SimpleDecoder();
+#endif
 
-            features = new Dictionary<string, bool>();
-            foreach (var featureItem in featureItems)
-            {
-                var key = $"{featureItem.FeatureCode}:{featureItem.Version}";
-                features.Add(key, featureItem.Enabled);
-            }
+                FeatureClient _featureClient = new FeatureClient(decoder);
+
+                FeatureItem[] featureItems = _featureClient.LoadConfigureFile();
+
+                features = new Dictionary<string, bool>();
+                foreach (var featureItem in featureItems)
+                {
+                    var key = $"{featureItem.FeatureCode}:{featureItem.Version}";
+                    features.Add(key, featureItem.Enabled);
+                }
         }
 
         public static bool Enabled(string FeatureCode, string Version)
         {
-            var key = $"{FeatureCode}:{Version}";
-            if (features.ContainsKey(key))
+            lock (features)
             {
-                return features[key];
+                if (!Initialized)
+                {
+                    LoadConfig();
+                    Initialized = true;
+                }
+
+                var key = $"{FeatureCode}:{Version}";
+                if (features.ContainsKey(key))
+                {
+                    return features[key];
+                }
+                return false;
             }
-            return false;
         }
     }
 }
