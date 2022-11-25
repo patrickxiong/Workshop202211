@@ -1,4 +1,6 @@
-﻿namespace WebClient
+﻿using ModelLib;
+
+namespace WebClient
 {
     public class FeatureClient
     {
@@ -8,12 +10,19 @@
 
         }
         //call api , save to config file
-        void GetFeatures()
+        public void GetFeatures()
         {
 
         }
 
-        void SaveConfigureFile()
-        {}
+        private void SaveConfigureFile(FeatureItem[] Items)
+        {
+
+        }
+
+        public FeatureItem LoadConfigureFile()
+        {
+            return null;
+        }
     }
 }
