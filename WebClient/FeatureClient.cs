@@ -22,7 +22,7 @@ namespace WebClient
 
         FeatureItem[] CallApi()
         {
-
+            return null;
         }
 
         private void SaveConfigureFile(FeatureItem[] Items)
@@ -34,11 +34,11 @@ namespace WebClient
 
 
 
-        public FeatureItem LoadConfigureFile()
+        public FeatureItem[] LoadConfigureFile()
         {
             var fileContent = File.ReadAllText(ConfigFile);
             var decoded = _decoder.Decode(fileContent);
-            var featureItem = JsonSerializer.Deserialize<FeatureItem>(decoded);
+            var featureItem = JsonSerializer.Deserialize<FeatureItem[]>(decoded);
             return featureItem;
         }
     }
