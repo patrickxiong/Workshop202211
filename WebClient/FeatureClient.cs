@@ -1,4 +1,5 @@
 ﻿using ModelLib;
+using System.Text.Json;
 
 namespace WebClient
 {
@@ -6,9 +7,11 @@ namespace WebClient
     {
         public static string ConfigFile = "Features.json";
         public static string ApiUrl = "";
+        private IEncodeDecode _decoder;
+
         public FeatureClient(IEncodeDecode decoder)
         {
-
+            _decoder = decoder;
         }
         //call api , save to config file
         public void GetFeatures()
@@ -24,12 +27,19 @@ namespace WebClient
 
         private void SaveConfigureFile(FeatureItem[] Items)
         {
-
+            var jsonString = JsonSerializer.Serialize(Items);
+            var encoded = _decoder.Encode(jsonString);
+            File.WriteAllText(ConfigFile, encoded);
         }
 
-        public static FeatureItem[] LoadConfigureFile()
+
+
+        public FeatureItem LoadConfigureFile()
         {
-            return null;
+            var fileContent = File.ReadAllText(ConfigFile);
+            var decoded = _decoder.Decode(fileContent);
+            var featureItem = JsonSerializer.Deserialize<FeatureItem>(decoded);
+            return featureItem;
         }
     }
 }
