@@ -1,4 +1,5 @@
 ﻿using System;
+using ModelLib;
 
 namespace Workshop2022.API.Models.Features
 {
@@ -8,12 +9,5 @@ namespace Workshop2022.API.Models.Features
         public FeatureItem[] features { get; set; }
     }
 
-    public class FeatureItem
-    {
-        public string FeatureCode { get; set; }
-        public string Version { get; set; }
-        public string Enabled { get; set; }
-
-    }
 
 }
