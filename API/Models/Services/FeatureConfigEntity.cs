@@ -23,13 +23,18 @@
         public bool IsIpSelected(string ip)
         {
             // fake logic
-            return true;
+            return ip == IpMask || IpMask == string.Empty;
         }
         public bool IsUserSelected(string userid)
         {
             // fake logic
-            return true;
+            return userid == UserGroup || UserGroup == string.Empty;
         }
 
+        public bool IsDeviceSelected(string device)
+        {
+            //fake logic
+            return device == Device || Device == string.Empty;
+        }
     }
 }

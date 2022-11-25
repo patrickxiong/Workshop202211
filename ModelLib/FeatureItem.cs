@@ -8,9 +8,15 @@ namespace ModelLib
 {
     public class FeatureItem
     {
-        public string FeatureCode { get; set; }
-        public string Version { get; set; }
-        public string Enabled { get; set; }
+        public FeatureItem(string featureCode, string version, bool enabled)
+        {
+            FeatureCode = featureCode;
+            Version = version;
+            Enabled = enabled;
+        }
 
+        public string FeatureCode { get; }
+        public string Version { get; }
+        public bool Enabled { get; }
     }
 }
